@@ -18,7 +18,7 @@
                 <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>ID</th>
+                         
                           <th>Cedula</th>
                           <th>Nombre</th>
                           <th>Departamento</th>
@@ -31,24 +31,23 @@
                           </tr>
                       </thead>
                       <tbody>
+                            
                       <?php
                        include 'database.php';
                        $pdo = Database::connect();
                        $sql = 'SELECT * FROM salario_empleado ORDER BY id DESC';
                        foreach ($pdo->query($sql) as $row) {
                                 echo '<tr>';
-                                echo '<td>'. $row['id'] . '</td>';
                                 echo '<td>'. $row['ced'] . '</td>';
                                 echo '<td>'. $row['nombre'] . '</td>';
                                 echo '<td>'. $row['departamento'] . '</td>';
-                               // echo '<td>'. $row['activo'] . '</td>';
                                 echo '<td>'. $row['fecha_inicio'] . '</td>';
                                 echo '<td>'. $row['fecha_final'] . '</td>';
                                 echo '<td>'. $row['devengado'] . '</td>';
                                 echo '<td>'. $row['deducciones'] . '</td>';
                                 echo '<td>'. $row['neto'] . '</td>';
                                 echo '<td width=250>';
-                                echo '<a class="btn" href="read.php?id='.$row['id'].'">Leer</a>';
+                                echo '<a class="btn" href="read.php?id='.$row['id'].'">Leer</a>'; 
                                 echo ' ';
                                 echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Modificar</a>';
                                 echo ' ';
@@ -62,8 +61,13 @@
                       ?>
                       </tbody>
                 </table>
+                <form class="form-horizontal" method="POST" action="Login.html">
+
+                        <div class="col-sm-offset-4 col-xs-4">
+                      <button type="submit" class="btn btn-primary" name="login">Salir</button>
+                        </div></form>
 
         </div>
-    </div> <!-- /container -->
+    </div>
   </body>
 </html>

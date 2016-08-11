@@ -13,7 +13,6 @@
 	
 	if ( !empty($_POST)) {
 		// keep track validation errors
-		$idError = null;
         $cedError = null;
         $nombreError = null;
         $departamentoError = null;
@@ -24,7 +23,6 @@
         $deduccionesError = null;
         $netoError = null;
         // keep track post values
-        $id = $_POST['id'];
         $ced = $_POST['ced'];
         $nombre = $_POST['nombre'];
         $departamento = $_POST['departamento'];
@@ -33,15 +31,11 @@
         $fecha_final = $_POST['fecha_final'];
         $devengado = $_POST['devengado'];
         $deducciones = $_POST['deducciones'];
-        $neto = $_POST['neto'];
+        $neto = $devengado - $deducciones;
 		
 		// validate input
 		$valid = true;
-        if (empty($id)) {
-            $idError = 'ingrese su id';
-            $valid = false;
-        }
-         
+        
         if (empty($ced)) {
             $cedError = 'ingrese su cedula';
             $valid = false;
@@ -135,15 +129,7 @@
 		    		</div>
     		
 	    			<form class="form-horizontal" action="update.php?id=<?php echo $id?>" method="post">
-					  <div class="control-group <?php echo !empty($idError)?'error':'';?>">
-                        <label class="control-label">Id</label>
-                        <div class="controls">
-                            <input name="id" type="text"  placeholder="Id" value="<?php echo !empty($id)?$id:'';?>">
-                            <?php if (!empty($idError)): ?>
-                                <span class="help-inline"><?php echo $idError;?></span>
-                            <?php endif; ?>
-                        </div>
-                      </div>
+					  
                       <div class="control-group <?php echo !empty($cedError)?'error':'';?>">
                         <label class="control-label">Cedula</label>
                         <div class="controls">
@@ -208,15 +194,7 @@
                         </div>
                       </div>
 
-                       <div class="control-group <?php echo !empty($deduccionesError)?'error':'';?>">
-                        <label class="control-label">Deducciones</label>
-                        <div class="controls">
-                            <input name="deducciones" type="text"  placeholder="deducciones" value="<?php echo !empty($deducciones)?$deducciones:'';?>">
-                            <?php if (!empty($deduccionesError)): ?>
-                                <span class="help-inline"><?php echo $deduccionesError;?></span>
-                            <?php endif;?>
-                        </div>
-                      </div>
+                       
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Update</button>
 						  <a class="btn" href="index.php">Back</a>

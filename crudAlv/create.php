@@ -1,10 +1,10 @@
-<<?php
+<?php
      
     require 'database.php';
  
     if ( !empty($_POST)) {
         // keep track validation errors
-        $idError = null;
+        
         $cedError = null;
         $nombreError = null;
         $departamentoError = null;
@@ -15,7 +15,7 @@
         $deduccionesError = null;
         $netoError = null;
         // keep track post values
-        $id = $_POST['id'];
+        
         $ced = $_POST['ced'];
         $nombre = $_POST['nombre'];
         $departamento = $_POST['departamento'];
@@ -24,14 +24,10 @@
         $fecha_final = $_POST['fecha_final'];
         $devengado = $_POST['devengado'];
         $deducciones = $_POST['deducciones'];
-        $neto = $_POST['neto'];
+        $neto = $devengado - $deducciones;
 
         // validate input
         $valid = true;
-        if (empty($id)) {
-            $idError = 'ingrese su id';
-            $valid = false;
-        }
          
         if (empty($ced)) {
             $cedError = 'ingrese su cedula';
@@ -82,9 +78,6 @@
         }
     }
 
-     
-
-
 ?>
 
 
@@ -106,15 +99,7 @@
                     </div>
              
                     <form class="form-horizontal" action="create.php" method="post">
-                      <div class="control-group <?php echo !empty($idError)?'error':'';?>">
-                        <label class="control-label">Id</label>
-                        <div class="controls">
-                            <input name="id" type="text"  placeholder="Id" value="<?php echo !empty($id)?$id:'';?>">
-                            <?php if (!empty($idError)): ?>
-                                <span class="help-inline"><?php echo $idError;?></span>
-                            <?php endif; ?>
-                        </div>
-                      </div>
+                      
                       <div class="control-group <?php echo !empty($cedError)?'error':'';?>">
                         <label class="control-label">Cedula</label>
                         <div class="controls">
@@ -178,56 +163,20 @@
                             <?php endif;?>
                         </div>
                       </div>
-                       <div class="control-group <?php echo !empty($netoError)?'error':'';?>">
-                        <label class="control-label">Neto</label>
-                        <div class="controls">
-                        <input name="neto" type="text"  placeholder="neto" value="<?php echo !empty($neto)?$neto:'';?>">
-
-                            <?php if (!empty($netoError)): ?>
-                                <span class="help-inline"><?php echo $netoError;?></span>
-                            <?php endif;?>
-                            
-                        </div>
-                      </div>
+                       
                       <script type="text/javascript">
                       function operaciones($devengado, $deducciones, $operacion) {
 
-            $neto = 0;
-
-            if($operacion == "Restar") {
-
-            $neto = $devengado - $deducciones;
-
-            }
-
-            return $neto; // Devolver el resultado
-
-            }
+            
                       </script>
-                    <!--<script type="text/javascript">
-                        function showContent() {
-                        element = document.getElementById("content");
-                        check = document.getElementById("check");
-                        if (check.checked) {
-                        element.style.display='block';
-                        }
-                        else {
-                        element.style.display='none';
-                        }
-                        }
-                        </script>
-
-                      </div>-->
         
-
                       <div class="form-actions">
                           <button type="submit" class="btn btn-success">Crear</button>
                           <a class="btn" href="index.php">Atras</a>
                         </div>
                     </form>
-                </div>
-                 
-    </div> <!-- /container -->
+                </div>      
+    </div> 
 
 
   </body>
